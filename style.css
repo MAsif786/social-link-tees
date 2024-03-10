@@ -1,0 +1,79 @@
+
+/* Add your CSS styles here */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header, footer {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    width: 100%;
+    position: sticky;
+    z-index: 1000;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+}
+
+.scroll-container {
+    overflow-x: auto;
+    max-height: 80vh; /* Adjust as needed */
+    margin: 20px auto;
+    padding: 10px 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.embedded-post {
+    border: 2px dashed #007bff;
+    padding: 10px;
+    margin: 10px;
+    flex: 0 0 400px; /* Set a fixed width or adjust as needed */
+    max-width: calc(100% - 20px); /* Ensure flexibility and spacing */
+}
+
+.embedded-post iframe {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.embedded-post h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.embedded-post p {
+    color: #666;
+    margin-top: 0;
+}
+
+.welcome-card {
+    border: 2px dashed #007bff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    flex: 0 0 400px; /* Set a fixed width or adjust as needed */
+    max-width: calc(100% - 20px); /* Ensure flexibility and spacing */
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branded Social Media Embeds</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>SocialLink Tees</h1>
+    </header>
+
+    <div class="scroll-container">
+        <div class="container">
+            <!-- Embedded posts will be dynamically added here -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 SocialLink Tees. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Get the value of the query parameter 'q'
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const jsonFileName = urlParams.get('q');
+
+        // Function to handle errors
+        const handleError = (message) => {
+            console.error(message);
+            // // Append error message to container
+            // document.querySelector('.container').innerHTML += `
+            //     <div class="welcome-card">
+            //         <h2>Error Encountered</h2>
+            //         <p>${message}</p>
+            //     </div>`;
+        };
+
+        // Make sure a valid JSON file name is provided
+        if (!jsonFileName) {
+            // Display welcome message
+            document.querySelector('.container').innerHTML += `
+                <div class="welcome-card">
+                    <h2>Welcome to SocialLink Tees</h2>
+                    <p>Buy our tees and share your social media tags to connect!</p>
+                </div>`;
+        } else {
+            // Make an AJAX request to fetch the JSON file dynamically
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `${jsonFileName}.json`, true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const jsonData = JSON.parse(xhr.responseText);
+                    
+                    // Embed Instagram post
+                    const instagramLink = jsonData["instagram_link"];
+                    if (instagramLink) {
+                        // Append Instagram post to container
+                        document.querySelector('.container').innerHTML += `
+                            <div class="embedded-post">
+                                <div id="instagram-media">
+                                    <blockquote class="instagram-media" data-instgrm-permalink="${instagramLink}" data-instgrm-version="13"></blockquote>
+                                </div>
+                            </div>`;
+
+                        const instaScript = document.createElement('script');
+                        instaScript.src = "//www.instagram.com/embed.js";
+                        instaScript.async = true;
+                        document.head.appendChild(instaScript);
+                        if (window.instgrm && window.instgrm.Embeds) {
+                            window.instgrm.Embeds.process();
+                        }
+                    } else {
+                        handleError('No Instagram link found in the JSON file');
+                    }
+                    
+                    // Embed iframe
+                    const iframeTag = jsonData["iframe_tag"];
+                    if (iframeTag) {
+                        console.log("iframeTag:::: ",iframeTag)
+                        // Append iframe to container
+                        document.querySelector('.container').innerHTML += `
+                            <div class="embedded-post">
+                                ${iframeTag}
+                            </div>`;
+                    } else {
+                        handleError('No iframe tag found in the JSON file');
+                    }
+                } else {
+                    handleError('Failed to fetch JSON file');
+                }
+
+            document.querySelector('.container').innerHTML += `
+                <div class="welcome-card">
+                    <h2>Welcome to SocialLink Tees</h2>
+                    <p>Buy our tees and share your social media tags to connect!</p>
+                </div>`;
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
