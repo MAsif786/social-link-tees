@@ -15,7 +15,7 @@ header, footer {
     color: white;
     padding: 10px 20px;
     text-align: center;
-    width: 100%;
+    /* width: 100%; */
     position: sticky;
     z-index: 1000;
 }
@@ -46,8 +46,8 @@ footer {
     border: 2px dashed #007bff;
     padding: 10px;
     margin: 10px;
-    flex: 0 0 400px; /* Set a fixed width or adjust as needed */
-    max-width: calc(100% - 20px); /* Ensure flexibility and spacing */
+    /* flex: 0 0 400px; Set a fixed width or adjust as needed */
+    max-width: calc(100% - 20px);   /* Ensure flexibility and spacing */
 }
 
 .embedded-post iframe {
@@ -74,6 +74,6 @@ footer {
     padding: 10px;
     margin: 10px;
     text-align: center;
-    flex: 0 0 400px; /* Set a fixed width or adjust as needed */
+    /* flex: 0 0 400px; Set a fixed width or adjust as needed */
     max-width: calc(100% - 20px); /* Ensure flexibility and spacing */
 }
